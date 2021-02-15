@@ -136,6 +136,14 @@ export default class ModalBox extends React.PureComponent {
     if (this.props.isOpen != prevProps.isOpen) {
       this.handleOpenning();
     }
+
+    if (this.props.backButtonClose != prevProps.backButtonClose && Platform.OS === 'android') {
+      if (this.props.backButtonClose) {
+        BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+      } else {
+        BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+      }
+    }
   }
 
   componentWillUnmount() {
