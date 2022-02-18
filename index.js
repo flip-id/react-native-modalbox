@@ -54,7 +54,8 @@ export default class ModalBox extends React.PureComponent {
     keyboardTopOffset: PropTypes.number,
     onClosed: PropTypes.func,
     onOpened: PropTypes.func,
-    onClosingState: PropTypes.func
+    onClosingState: PropTypes.func,
+    accessibilityLabel: PropTypes.string,
   };
 
   static defaultProps = {
@@ -72,7 +73,8 @@ export default class ModalBox extends React.PureComponent {
     easing: Easing.elastic(0.8),
     coverScreen: false,
     keyboardTopOffset: Platform.OS == 'ios' ? 22 : 0,
-    useNativeDriver: true
+    useNativeDriver: true,
+    accessibilityLabel: 'modal_box',
   };
 
   constructor(props) {
@@ -547,6 +549,7 @@ export default class ModalBox extends React.PureComponent {
 
     return (
       <Modal
+        accessibilityLabel={this.props.accessibilityLabel}
         onRequestClose={() => {
           if (this.props.backButtonClose) {
             this.close();
